@@ -52,25 +52,25 @@ Node* uniform_cost_search (Node* initial) {
 			test->depth = dept;
 			return test;
 		}
-		//Expanding up
+		
 		temp = new Node(test->game);
 		if(temp->game.get_blank() != 0 && temp->game.get_blank() != 1 && temp->game.get_blank() != 2) {
 			temp->game.move_up();
 			que.push(temp);
 		}
-		//Expanding left
+		
                 temp = new Node(test->game);
 		if(temp->game.get_blank() != 0 && temp->game.get_blank() != 3 && temp->game.get_blank() != 6) {
 			temp->game.move_left();
 			que.push(temp);
 		}
-		//Expanding down
+		
                 temp = new Node(test->game);
 		if(temp->game.get_blank() != 6 && temp->game.get_blank() != 7 && temp->game.get_blank() != 8) {
 			temp->game.move_down();
 			que.push(temp);
                 }
-		//Expanding right
+		
 		temp = new Node(test->game);
                 if(temp->game.get_blank() != 2 && temp->game.get_blank() != 5 && temp->game.get_blank() != 8) {  
 			temp->game.move_right();

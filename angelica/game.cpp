@@ -6,8 +6,8 @@
 //constructors
 Game::Game() {
 	board = { 'A', 'C', 'I', 'L', 'E', 'G', 'N', 'A', '0' };
+	goal_state = { 'A', 'N', 'G', 'E', 'L', 'I', 'C', 'A', '0' };
 }
-
 
 
 
@@ -32,6 +32,13 @@ void Game::draw_board() {
 		}
 	}
 }
+
+/*bool Game::is_goal() {
+	if(board == goal_state) {
+		return true;
+	}
+	return false;
+}*/
 
 
 
@@ -67,4 +74,5 @@ void Game::move_right() {
 	board[pos] = board[pos+1];
 	board[pos+1] = '0';
 }
+
 

@@ -1,0 +1,9 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+PROJECT(finalProject)
+
+
+SET(CMAKE_CXX_STANDARD 11)
+
+ADD_EXECUTABLE(go main.cpp game.cpp a.cpp)
+
+

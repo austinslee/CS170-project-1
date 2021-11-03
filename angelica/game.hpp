@@ -2,15 +2,17 @@
 #define GAME_HPP
 
 #include <vector>
+//#include <queue>
 #include <algorithm>
 #include <iostream>
 #include <stdlib.h>
+#include <stdio.h>
 
 class Game {
 	public:
 		std::vector<char> board;
 		bool goal = false;
-		std::vector<char> goal_state = {'A', 'N', 'G', 'E', 'L', 'I', 'C', 'A', '0'};
+		std::vector<char> goal_state;
 
 		//movement operators
 		void move_up();
@@ -26,6 +28,11 @@ class Game {
 		//misc
 		int get_blank();
 		void draw_board();
+//		bool is_goal;
+
+
+		//heuristics
+
 };
 		
 

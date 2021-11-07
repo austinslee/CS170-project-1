@@ -15,13 +15,17 @@ class MyCompare {
 	}
 };
 
-Node* uniform_cost_search (Node* initial) {
+
+
+
+Node* misplaced_tiles_search (Node* initial) {
 	std::priority_queue<Node*, std::vector<Node*>, MyCompare> que;
 	std::vector<Node*> explored; //to avoid duplicates so no infinite loop
 	que.push(initial);
 	int nodes_explored = 0;
 	Node* test;
 	Node* temp;
+	int max_que_size = 0;
 
 	int which = 0;
 
@@ -29,6 +33,9 @@ Node* uniform_cost_search (Node* initial) {
 	initial->tot_cost = initial->g_cost + initial->mis_cost();
 	while(1) {
 		++nodes_explored;
+		if(que.size() > max_que_size) {
+			max_que_size = que.size();
+		}
 		if(que.empty()) {
 			std::cout << "\n you fucked up, que empty \n";
 			return NULL;
@@ -50,13 +57,16 @@ Node* uniform_cost_search (Node* initial) {
 		if(test->game.board == test->game.goal_state) {
 		
 			std::cout << "\n Solved \n";
-			std::cout << "g_cost = " << test->g_cost;
+			std::cout << "\n Nodes explored: " << nodes_explored << std::endl;
+			std::cout << "\n max queue size: " << max_que_size << std::endl;
+			std::cout << "depth of solution = " << test->g_cost;
 			std::cout << "\n Route taken: \n:";
 			temp = test;
 			while(temp->parent != NULL) {
 				temp->game.draw_board();
 				temp = temp->parent;
 			}
+			temp->game.draw_board();
 				
 			return test;
 		}
@@ -136,9 +146,14 @@ int main() {
 	two->game.move_left();
 	
 	
+	auto time_start = std::chrono::high_resolution_clock::now();	
 
-	uniform_cost_search(start);
+	misplaced_tiles_search(start);
 	
+	auto time_stop = std::chrono::high_resolution_clock::now();
+	auto time_duration = std::chrono::duration_cast<std::chrono::microseconds>(time_stop - time_start);
+	std::cout << "\n Time it took to run A star search with misplaced tiles heuristics " << time_duration.count() << " microseconds \n";	
+
 	Node* temp;
 	std::priority_queue<Node*, std::vector<Node*>, MyCompare> que;
 	que.push(start);

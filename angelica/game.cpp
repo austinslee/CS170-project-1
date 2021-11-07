@@ -5,8 +5,8 @@
 
 //constructors
 Game::Game() {
-	board = { 'A', 'C', 'I', 'L', 'E', 'G', 'N', 'A', '0' };
-	//board = { 'A', 'N', 'G', 'E', '0', 'I', 'L', 'C', 'A' };
+	//board = { 'A', 'C', 'I', 'L', 'E', 'G', 'N', 'A', '0' };
+	board = { 'A', 'E', 'G', '0', 'L', 'I', 'N', 'C', 'A' };
 	goal_state = { 'A', 'N', 'G', 'E', 'L', 'I', 'C', 'A', '0' };
 }
 

@@ -6,6 +6,7 @@
 //constructors
 Game::Game() {
 	board = { 'A', 'C', 'I', 'L', 'E', 'G', 'N', 'A', '0' };
+	//board = { 'A', 'N', 'G', 'E', '0', 'I', 'L', 'C', 'A' };
 	goal_state = { 'A', 'N', 'G', 'E', 'L', 'I', 'C', 'A', '0' };
 }
 
@@ -23,6 +24,7 @@ int Game::get_blank() {
 }
 
 void Game::draw_board() {
+	std::cout << "\n";
 	for(int i = 0; i < 10; ++i) {
 //		if(board[i] != '0') {
 			std::cout << board[i] << " ";
@@ -31,6 +33,7 @@ void Game::draw_board() {
 			std::cout << "\n";
 		}
 	}
+	std::cout << "\n";
 }
 
 /*bool Game::is_goal() {

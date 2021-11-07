@@ -15,13 +15,19 @@ class Astar {
 
 class Node {
         public:
-                Node* parent;
+                Node* parent = NULL;
                 Game game;
+
+
+		int tot_cost = 0;
+		int g_cost = 0;
+
                 Node(Game enter) {
                         game = enter;
                 };
                 int depth = 0;
                 int mis_cost();
+
 };
 
 
@@ -30,7 +36,7 @@ class Node {
 }*/
 
 
-Node* uniform_cost_search (Node* initial) {
+/*Node* uniform_cost_search (Node* initial) {
 	std::priority_queue<Node*> que;
 	que.push(initial);
 	int dept = 0;
@@ -78,7 +84,7 @@ Node* uniform_cost_search (Node* initial) {
 		}
 		std::cout << "reached end \n";
 	}
-}
+}*/
 		
 		
 	

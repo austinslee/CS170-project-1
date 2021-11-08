@@ -14,6 +14,9 @@ class Game {
 		bool goal = false;
 		std::vector<char> goal_state;
 
+		
+
+
 		//movement operators
 		void move_up();
 		void move_left();

@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<stdio.h>
+#include<stdlib.h> //for abs
 #include<queue>
 #include "game.hpp"
 
@@ -27,6 +28,7 @@ class Node {
                 };
                 int depth = 0;
                 int mis_cost();
+		int man_cost();
 
 };
 

@@ -17,6 +17,104 @@ class MyCompare {
 
 
 
+Node* uniform_cost_search (Node* initial) {
+	std::priority_queue<Node*, std::vector<Node*>, MyCompare> que;
+	std::vector<Node*> explored;
+	que.push(initial);
+	int nodes_explored = 0;
+	Node* test;
+	Node* temp;
+	int max_que_size = 0;
+
+	int which = 0;
+
+	int miscost = initial->mis_cost();
+	initial->tot_cost = initial->g_cost + initial->mis_cost();
+	while(1) {
+		++nodes_explored;
+		if(que.size() > max_que_size) {
+			max_que_size = que.size();
+		}
+		if(que.empty()) {
+			std::cout << "\n you fucked up, que empty \n";
+			return NULL;
+		}
+
+		starty:
+
+		test = que.top();
+		que.pop();
+		for(int i = 0; i < explored.size(); ++i) {
+			if(test->game.board == explored.at(i)->game.board) {
+				goto starty;
+			}
+		}
+		explored.push_back(test);
+		if(test->game.board == test->game.goal_state) {
+		
+			std::cout << "\n Solved \n";
+			std::cout << "\n Nodes explored: " << nodes_explored << std::endl;
+			std::cout << "\n max queue size: " << max_que_size << std::endl;
+			std::cout << "depth of solution = " << test->g_cost;
+			std::cout << "\n Route taken: \n:";
+			temp = test;
+			while(temp->parent != NULL) {
+				temp->game.draw_board();
+				temp = temp->parent;
+			}
+			temp->game.draw_board();
+				
+			return test;
+		}
+		
+		temp = new Node(test->game);
+		if(temp->game.get_blank() != 0 && temp->game.get_blank() != 1 && temp->game.get_blank() != 2) {
+			temp->game.move_up();
+			temp->parent = test;
+			if(temp->parent != NULL) {
+				temp->g_cost = temp->parent->g_cost + 1;
+			}
+			temp->tot_cost = temp->g_cost;
+			que.push(temp);
+		}
+		
+                temp = new Node(test->game);
+		if(temp->game.get_blank() != 0 && temp->game.get_blank() != 3 && temp->game.get_blank() != 6) {
+			temp->game.move_left();
+			temp->parent = test;
+			if(temp->parent != NULL) {
+				temp->g_cost = temp->parent->g_cost + 1;
+			}
+			temp->tot_cost = temp->g_cost;
+			que.push(temp);
+		}
+		
+                temp = new Node(test->game);
+		if(temp->game.get_blank() != 6 && temp->game.get_blank() != 7 && temp->game.get_blank() != 8) {
+			temp->game.move_down();
+			temp->parent = test;
+			if(temp->parent != NULL) {
+				temp->g_cost = temp->parent->g_cost + 1;
+			}
+			temp->tot_cost = temp->g_cost;
+			que.push(temp);
+                }
+		
+		temp = new Node(test->game);
+                if(temp->game.get_blank() != 2 && temp->game.get_blank() != 5 && temp->game.get_blank() != 8) {  
+			temp->game.move_right();
+			temp->parent = test;
+			if(temp->parent != NULL) {
+				temp->g_cost = temp->parent->g_cost + 1;
+			}
+			temp->tot_cost = temp->g_cost;
+			que.push(temp);
+		}
+	}
+}
+
+
+
 
 Node* misplaced_tiles_search (Node* initial) {
 	std::priority_queue<Node*, std::vector<Node*>, MyCompare> que;
@@ -119,7 +217,7 @@ Node* misplaced_tiles_search (Node* initial) {
 				temp = que.top();
 				que.pop();
 				std::cout << "\n " << temp->mis_cost() << "\n";
-			}
+		}
 			return NULL;
 		}*/
 
@@ -146,14 +244,15 @@ int main() {
 	two->game.move_left();
 	
 	
-	auto time_start = std::chrono::high_resolution_clock::now();	
+/*	auto time_start = std::chrono::high_resolution_clock::now();	
 
-	misplaced_tiles_search(start);
+	//misplaced_tiles_search(start);
+	uniform_cost_search(start);
 	
 	auto time_stop = std::chrono::high_resolution_clock::now();
 	auto time_duration = std::chrono::duration_cast<std::chrono::microseconds>(time_stop - time_start);
 	std::cout << "\n Time it took to run A star search with misplaced tiles heuristics " << time_duration.count() << " microseconds \n";	
-
+*/
 	Node* temp;
 	std::priority_queue<Node*, std::vector<Node*>, MyCompare> que;
 	que.push(start);
@@ -166,7 +265,7 @@ int main() {
 	}*/
 		
 	Node* temp123;
-	/*while(1) {
+	while(1) {
 		if(test.board == test.goal_state) {
 			std::cout << "\n Solved \n";
 			break;
@@ -196,8 +295,8 @@ int main() {
 
 		//outputting misplaced cost
 		temp123 = new Node(test);
-		std::cout << "\n mis: " << temp123->mis_cost() << "\n";
-	}*/
+		std::cout << "\n man: " << temp123->man_cost() << "\n";
+	}
 }
 
 #endif //__MAIN_CPP__

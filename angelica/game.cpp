@@ -7,6 +7,7 @@
 Game::Game() {
 	//board = { 'A', 'C', 'I', 'L', 'E', 'G', 'N', 'A', '0' };
 	board = { 'A', 'E', 'G', '0', 'L', 'I', 'N', 'C', 'A' };
+	//board = { 'A', 'N', 'G', 'E', 'L', 'I', 'C', 'A', '0' };
 	goal_state = { 'A', 'N', 'G', 'E', 'L', 'I', 'C', 'A', '0' };
 }
 
